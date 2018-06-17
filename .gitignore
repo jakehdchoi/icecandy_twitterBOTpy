@@ -1,4 +1,5 @@
 # config
+config.py
 credentials.py
 
 # database directory
