@@ -7,7 +7,9 @@ from config import *
 from credentials import *
 
 
-# todo: python month text to number
+# todo:
+# python month text to number
+# .json file read and write
 
 
 url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
@@ -38,8 +40,11 @@ def main():
     for screen_name in userList:
         res = get_user_timeline(screen_name, count, exclude_replies, include_rts)
         for tweet in res:
-            print (tweet['full_text'])
+            print(tweet['created_at'])
+            print(tweet['user']['screen_name'] + ' (' + tweet['user']['name'] + ')')
+            print(tweet['full_text'])
             print('-----')
+        # print(pjson(res))
 
     endTime = time.time()
     elapsedTime = endTime - startTime
