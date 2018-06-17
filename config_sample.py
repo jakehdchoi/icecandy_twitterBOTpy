@@ -1,3 +1,5 @@
+# config.py
+
 userList = [
     'screen_name1',
     'screen_name2'
