@@ -1,3 +1,13 @@
+# config
+credentials.py
+
+# database directory
+database_json/
+
+# tweepy
+tweepy/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
