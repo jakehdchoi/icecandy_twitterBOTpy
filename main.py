@@ -4,14 +4,11 @@ import requests
 from requests_oauthlib import OAuth1
 
 
-# sudo apt install python3-pip
-# sudo pip3 install tweepy
-import tweepy
-
 from credentials import *
 
 
 # todo: python month text to number
+
 
 url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
 auth = OAuth1(consumer_key, consumer_secret, access_token, access_token_secret)
@@ -19,20 +16,17 @@ requests.get(url, auth=auth)
 
 
 userList = [
-    # 'BTCTN',
-    # 'rogerkver',
+    'BTCTN',
+    'rogerkver',
     'VitalikButerin',
-    # 'justinsuntron',
-    # 'Huobi_Pro',
+    'justinsuntron',
+    'Huobi_Pro',
     'jakehdchoi'
 ]
 
 count = 5
 exclude_replies = 'false'
 include_rts = 'true'
-
-
-
 
 
 
@@ -49,34 +43,21 @@ def get_user_timeline(screen_name, count, exclude_replies, include_rts):
         return r.raise_for_status()
 
 
+def main():
+    print('icecandy...')
+    # time.sleep(10)
+    startTime = time.time()
+    print(time.strftime('start: ' + '%Y-%m-%d %H:%M:%S', time.localtime()))
 
-for screen_name in userList:
-    res = get_user_timeline(screen_name, count, exclude_replies, include_rts)
-    for tweet in res:
-        print (tweet['full_text'])
-        print('-----')
+    for screen_name in userList:
+        res = get_user_timeline(screen_name, count, exclude_replies, include_rts)
+        for tweet in res:
+            print (tweet['full_text'])
+            print('-----')
 
-
-# for tweet in r.json():
-#   # print (tweet['text'])
-#   print('-----')
-# # print(json.dumps(r.json(), indent=2, sort_keys=True))
-# print(pjson(r.json()))
-
-# for user in userList:
-#     tweet = api.user_timeline(
-#         screen_name = user,
-#         count = numberOfTwits,
-#         tweet_mode = "extended",
-#         include_rts = False)
-#     # pp = pprint.PrettyPrinter(indent=4)
-#     # pp.pprint(str(tweet))
-#     # print (json.dumps(tweet.__dict__, indent=4, sort_keys=True))
-#     print (json.dumps(str(tweet), indent=4, sort_keys=True))
-#     # print (json.dumps(tweet.__dict__))
-#
-#     print(len(tweet))
-
+    endTime = time.time()
+    elapsedTime = endTime - startTime
+    print('elapsedTime in sec: ' + str(elapsedTime))
 
 
 # my_file = open('verne.txt', 'r')
@@ -99,12 +80,5 @@ for screen_name in userList:
 
 
 
-
-
-# def main():
-#     print('icecandy...')
-#     # time.sleep(10)
-#     print(time.strftime('start: ' + '%Y-%m-%d %H:%M:%S', time.localtime()))
-#
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
