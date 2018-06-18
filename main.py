@@ -38,7 +38,7 @@ def main():
     print('icecandy...')
     # time.sleep(10)
     startTime = time.time()
-    print(time.strftime('start: ' + '%Y-%m-%d %H:%M:%S', time.localtime()))
+    print( 'startTime:', time.asctime(time.localtime(startTime)) )
 
     for screen_name in userList:
         res = get_user_timeline(screen_name, count, exclude_replies, include_rts)
