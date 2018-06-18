@@ -1,3 +1,5 @@
+# python3
+
 import time
 import json
 import requests
@@ -8,8 +10,9 @@ from credentials import *
 
 
 # todo:
-# python month text to number
 # .json file read and write
+
+global tm_wday, tm_month, tm_mday, tm_clock, tm_zone, tm_year, struct_time
 
 
 url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
@@ -41,6 +44,10 @@ def main():
         res = get_user_timeline(screen_name, count, exclude_replies, include_rts)
         for tweet in res:
             print(tweet['created_at'])
+            tm_wday, tm_month, tm_mday, tm_clock, tm_zone, tm_year = tweet['created_at'].split()
+            struct_time = time.strptime(tm_month, '%b')
+            # print(str(struct_time.tm_mon)) # 6, month, int
+
             print(tweet['user']['screen_name'] + ' (' + tweet['user']['name'] + ')')
             print(tweet['full_text'])
             print('-----')
@@ -69,6 +76,35 @@ def main():
 
 
 
+# try: # 파일이 없으면 예외 발생
+#     print('try: ' + symbol)
+#     with open(symbol + '_' + str(period) + 'p_' + interval + '_candle.data', 'r') as f:
+#         data = json.load(f)
+#     print(len(data))
+#
+#     for i in data:
+#         # print & write
+#         with open(symbol + '_' + str(period) + 'p_' + interval + '_converted_data.txt', 'a') as f:
+#             r = datetime.datetime.fromtimestamp(int(i[0]) / 1000).strftime('%Y-%m-%d %H:%M:%S' + ',')
+#             rclosed = float(i[4])
+#             f.write(r)
+#             f.write(str(rclosed))
+#             f.write('\n')
+#
+# except FileNotFoundError:
+#     print('FileNotFoundError: ' + symbol)
+#     pass
+
+
+
+# try:
+#     f = open('Estimated_BTC_Value.csv','a')
+#     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + ' ' + str(Estimated_BTC_Value) + ' BTC', file=f)
+#
+# except IOError as err:
+#     print('File Error' + str(err))
+# finally:
+#     f.close()
 
 
 if __name__ == "__main__":
