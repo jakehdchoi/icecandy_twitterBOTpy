@@ -2,9 +2,10 @@
 
 import time
 
-struct_time = time.strptime("30 Nov 00", "%d %b %y")
+struct_time = time.strptime("03 Nov 00", "%d %b %y")
 print ("returned tuple: ", struct_time)
-# returned tuple: (2000, 11, 30, 0, 0, 0, 3, 335, -1)
+# returned tuple:  time.struct_time(tm_year=2000, tm_mon=11, tm_mday=3, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=335, tm_isdst=-1)
+
 #
 # %a - abbreviated weekday name
 # %A - full weekday name
