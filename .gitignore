@@ -3,7 +3,8 @@ config.py
 credentials.py
 
 # database directory
-database_json/
+database_json/*.json
+
 
 # tweepy
 tweepy/

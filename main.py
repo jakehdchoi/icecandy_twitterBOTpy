@@ -9,7 +9,8 @@ from functions import *
 
 
 # todo:
-# remove duplicates in file
+# maxFileName = max(os.listdir('database_json')) ==> if foler is empty, error. fix it
+
 
 
 print('icecandy...')
