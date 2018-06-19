@@ -9,7 +9,7 @@ from functions import *
 
 
 # todo:
-# unionData sort by created_at: collections.OrderedDict
+# remove duplicates in file
 
 
 print('icecandy...')
@@ -30,7 +30,10 @@ sortedData = []
 # file load logic
 try: # err if no file
     with open('database_json/' + gmtimeString + '.json', 'r') as f:
-        unionData = json.load(f)
+        try:
+            unionData = json.load(f)
+        except:
+            unionData = []
     # print(pjson(unionData))
 
     open_n_more_files(number_of_file_loads, fileNames, unionData)
@@ -44,9 +47,6 @@ except FileNotFoundError:
     open_n_more_files(number_of_file_loads, fileNames, unionData)
 
 
-
-def order_objects_by_created_at(unionData):
-    pass
 
 def main():
     # time.sleep(10)
@@ -64,14 +64,14 @@ def main():
 
         merge_without_duplicate(res, unionData)
 
-        # todo: sort by created_at
 
-        exclude_objects_by_created_at(unionData, sortedData, gmtime)
+    exclude_objects_by_created_at(unionData, sortedData, gmtime)
+    print(len(sortedData))
+    finalData = order_objects_by_created_at(sortedData)
+    print(len(finalData))
 
-        finalData = order_objects_by_created_at(unionData)
-    print(pjson(sortedData))
-    # with open('database_json/' + gmtimeString + '.json', 'w') as f:
-    #     json.dump(unionData, f)
+    with open('database_json/' + gmtimeString + '.json', 'w') as f:
+        json.dump(finalData, f)
 
 
 

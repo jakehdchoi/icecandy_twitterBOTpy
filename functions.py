@@ -2,6 +2,7 @@ import time
 import json
 import requests
 from requests_oauthlib import OAuth1
+from operator import itemgetter
 
 from config import *
 from credentials import *
@@ -84,6 +85,7 @@ def open_n_more_files(number_of_file_loads, fileNames, unionData):
                 merge_without_duplicate(json.load(f), unionData)
                 # print(len(unionData))
             i += 1
+    return True
 
 def exclude_objects_by_created_at(unionData, sortedData, gmtime):
     gmString = time.asctime(gmtime)
@@ -98,3 +100,6 @@ def exclude_objects_by_created_at(unionData, sortedData, gmtime):
         else:
             pass
     return True
+
+def order_objects_by_created_at(sortedData):
+    return sorted(sortedData, key=itemgetter('created_at'), reverse=True)
