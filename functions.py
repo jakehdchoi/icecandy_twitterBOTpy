@@ -8,11 +8,11 @@ from credentials import *
 
 
 global tm_wday, tm_mon, tm_mday, tm_clock, tm_zone, tm_year, struct_time
-global unionData
+global unionData, sortedData
 
-url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
 auth = OAuth1(consumer_key, consumer_secret, access_token, access_token_secret)
-requests.get(url, auth=auth)
+# url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
+# requests.get(url, auth=auth)
 
 
 def pjson(a):
@@ -31,7 +31,7 @@ def merge_without_duplicate(lis1, lis2):
     for aLis1 in lis1:
         if aLis1 not in lis2:
             lis2.append(aLis1)
-    return lis2
+    return True
 
 def convert_created_at_into_NumString(created_at):
     tm_wday, tm_mon, tm_mday, tm_clock, tm_zone, tm_year = created_at.split()
@@ -42,6 +42,7 @@ def convert_created_at_into_NumString(created_at):
         return str(tm_year) + str(struct_time.tm_mon) + str(tm_mday)
 
 def convert_gmtime_into_NumString(gmtime):
+    # print(len(res))mtime):
     if gmtime.tm_mon < 10:
         if gmtime.tm_mday < 10:
             return str(gmtime.tm_year) + '0' + str(gmtime.tm_mon) + '0' + str(gmtime.tm_mday)
@@ -83,3 +84,17 @@ def open_n_more_files(number_of_file_loads, fileNames, unionData):
                 merge_without_duplicate(json.load(f), unionData)
                 # print(len(unionData))
             i += 1
+
+def exclude_objects_by_created_at(unionData, sortedData, gmtime):
+    gmString = time.asctime(gmtime)
+    if gmtime.tm_mday < 10:
+        gmString = gmString[0:8] + '0' + str(gmtime.tm_mday)
+    else:
+        gmString = gmString[0:8] + str(gmtime.tm_mday)
+
+    for obj in unionData:
+        if gmString in obj['created_at']:
+            sortedData.append(obj)
+        else:
+            pass
+    return True
