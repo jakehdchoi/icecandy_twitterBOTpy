@@ -17,13 +17,15 @@ startTime = time.time()
 print( 'startTime(local) :', time.asctime(time.localtime(startTime)) )
 print( 'startTime(global):', time.asctime(time.gmtime()) )
 
-gmtime = convert_gmtime_into_NumString() # this is used to open a file
+gmtime = time.gmtime()
+gmtimeString =  convert_gmtime_into_NumString(gmtime) # this is used to open a file
+
 fileNames = os.listdir('database_json')
 maxFileName = max(os.listdir('database_json'))
 
 # file load logic
 try: # err if no file
-    with open('database_json/' + gmtime + '.json', 'r') as f:
+    with open('database_json/' + gmtimeString + '.json', 'r') as f:
         unionData = json.load(f)
     # print(pjson(unionData))
 
@@ -31,7 +33,7 @@ try: # err if no file
 
 except FileNotFoundError:
     print(" There is no file that match, so let's make an empty file. ")
-    with open('database_json/' + gmtime + '.json', 'w') as f:
+    with open('database_json/' + gmtimeString + '.json', 'w') as f:
         json.dump([], f)
 
     open_n_more_files(number_of_file_loads, fileNames, unionData)
@@ -58,7 +60,7 @@ except FileNotFoundError:
 #
 #         # todo: sort by created_at
 #
-#     with open('database_json/' + gmtime + '.json', 'w') as f:
+#     with open('database_json/' + gmtimeString + '.json', 'w') as f:
 #         json.dump(unionData, f)
 #
 #

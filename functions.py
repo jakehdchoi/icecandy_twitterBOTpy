@@ -8,7 +8,7 @@ from credentials import *
 
 
 global tm_wday, tm_mon, tm_mday, tm_clock, tm_zone, tm_year, struct_time
-global unionData, fileData
+global unionData
 
 url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
 auth = OAuth1(consumer_key, consumer_secret, access_token, access_token_secret)
@@ -41,18 +41,17 @@ def convert_created_at_into_NumString(created_at):
     else:
         return str(tm_year) + str(struct_time.tm_mon) + str(tm_mday)
 
-def convert_gmtime_into_NumString():
-    thisTime = time.gmtime()
-    if thisTime.tm_mon < 10:
-        if thisTime.tm_mday < 10:
-            return str(thisTime.tm_year) + '0' + str(thisTime.tm_mon) + '0' + str(thisTime.tm_mday)
+def convert_gmtime_into_NumString(gmtime):
+    if gmtime.tm_mon < 10:
+        if gmtime.tm_mday < 10:
+            return str(gmtime.tm_year) + '0' + str(gmtime.tm_mon) + '0' + str(gmtime.tm_mday)
         else:
-            return str(thisTime.tm_year) + '0' + str(thisTime.tm_mon) + str(thisTime.tm_mday)
+            return str(gmtime.tm_year) + '0' + str(gmtime.tm_mon) + str(gmtime.tm_mday)
     else:
-        if thisTime.tm_mday < 10:
-            return str(thisTime.tm_year) + str(thisTime.tm_mon) + '0' + str(thisTime.tm_mday)
+        if gmtime.tm_mday < 10:
+            return str(gmtime.tm_year) + str(gmtime.tm_mon) + '0' + str(gmtime.tm_mday)
         else:
-            return str(thisTime.tm_year) + str(thisTime.tm_mon) + str(thisTime.tm_mday)
+            return str(gmtime.tm_year) + str(gmtime.tm_mon) + str(gmtime.tm_mday)
 
 def print_created_at_from_dict(data):
     try:
