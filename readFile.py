@@ -1,5 +1,5 @@
 
-
+import time
 import json
 from operator import itemgetter
 
@@ -10,6 +10,11 @@ def pjson(a):
     return json.dumps(a, indent=2, sort_keys=True)
 
 
+startTime = time.time()
+gmtime = time.gmtime()
+
+print( 'startTime(local) :', time.asctime(time.localtime(startTime)) )
+print( 'startTime(global):', time.asctime(gmtime) )
 
 with open('database_json/20180619.json', 'r') as f:
     unionData = json.load(f)
@@ -22,6 +27,7 @@ for tweet in unionData:
     print('-----')
 
 print('')
+# print(pjson(unionData))
 print(len(unionData))
 
 

@@ -64,14 +64,16 @@ def main():
 
         merge_without_duplicate(res, unionData)
 
-
+    print(len(unionData))
     exclude_objects_by_created_at(unionData, sortedData, gmtime)
     print(len(sortedData))
     finalData = order_objects_by_created_at(sortedData)
     print(len(finalData))
+    uniqueData = remove_duplicated_tweets_from_ordered_data(finalData)
+    print(len(uniqueData))
 
     with open('database_json/' + gmtimeString + '.json', 'w') as f:
-        json.dump(finalData, f)
+        json.dump(uniqueData, f)
 
 
 
