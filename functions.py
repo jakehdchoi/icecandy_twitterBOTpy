@@ -10,7 +10,8 @@ from credentials import *
 
 
 global tm_wday, tm_mon, tm_mday, tm_clock, tm_zone, tm_year, struct_time
-global unionData, sortedData
+global unionData, sortedData, yesterdayData
+global yesterdayCheck # used to edit yesterday data file
 
 auth = OAuth1(consumer_key, consumer_secret, access_token, access_token_secret)
 # url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
@@ -26,7 +27,7 @@ def get_user_timeline(screen_name, count, exclude_replies, include_rts):
         return r.json()
     except:
         print(' ' + str(r.status_code) + ' err: get_user_timeline')
-        with open('log/' + convert_time_struct_into_yyymmdd_hhmmss_string(time.localtime()) + '_' + str(r.status_code) + '.log', 'w') as f:
+        with open('log/' + convert_time_struct_into_yyyymmdd_hhmmss_string(time.localtime()) + '_' + str(r.status_code) + '.log', 'w') as f:
             f.write(str(r.status_code)) #<class 'int'>
         raise SystemExit
 
@@ -36,16 +37,16 @@ def merge_without_duplicate(lis1, lis2):
             lis2.append(aLis1)
     return True
 
-def convert_created_at_into_yyymmdd_string(created_at):
+def convert_created_at_into_yyyymmdd_string(created_at):
     tm_wday, tm_mon, tm_mday, tm_clock, tm_zone, tm_year = created_at.split()
     struct_time = time.strptime(tm_mon, '%b')
     return str(tm_year) + two_digit_number_string_out(struct_time.tm_mon) + str(tm_mday)
 
-def convert_time_struct_into_yyymmdd_string(timeStruct):
+def convert_time_struct_into_yyyymmdd_string(timeStruct):
     # print(len(res))mtime):
     return str(timeStruct.tm_year) + two_digit_number_string_out(timeStruct.tm_mon) + two_digit_number_string_out(timeStruct.tm_mday)
 
-def convert_time_struct_into_yyymmdd_hhmmss_string(timeStruct):
+def convert_time_struct_into_yyyymmdd_hhmmss_string(timeStruct):
     return str(timeStruct.tm_year) + two_digit_number_string_out(timeStruct.tm_mon) + two_digit_number_string_out(timeStruct.tm_mday) + '_' + two_digit_number_string_out(timeStruct.tm_hour) + two_digit_number_string_out(timeStruct.tm_min) + two_digit_number_string_out(timeStruct.tm_sec)
 
 def two_digit_number_string_out(integer):
@@ -86,6 +87,7 @@ def open_n_more_files(number_of_file_loads, fileNames, unionData):
             i += 1
     return True
 
+# improvable
 def exclude_objects_by_created_at(unionData, sortedData, gmtime):
     gmString = time.asctime(gmtime)
     if gmtime.tm_mday < 10:
