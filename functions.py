@@ -1,6 +1,7 @@
 import time
 import json
 import requests
+import logging
 from requests_oauthlib import OAuth1
 from operator import itemgetter
 
@@ -25,8 +26,9 @@ def get_user_timeline(screen_name, count, exclude_replies, include_rts):
         return r.json()
     except:
         print(' ' + str(r.status_code) + ' err: get_user_timeline')
-        print(r.raise_for_status())
-        return r.raise_for_status()
+        with open('log/' + convert_time_struct_into_yyymmdd_hhmmss_string(time.localtime()) + '_' + str(r.status_code) + '.log', 'w') as f:
+            f.write(str(r.status_code)) #<class 'int'>
+        raise SystemExit
 
 def merge_without_duplicate(lis1, lis2):
     for aLis1 in lis1:
@@ -34,26 +36,23 @@ def merge_without_duplicate(lis1, lis2):
             lis2.append(aLis1)
     return True
 
-def convert_created_at_into_NumString(created_at):
+def convert_created_at_into_yyymmdd_string(created_at):
     tm_wday, tm_mon, tm_mday, tm_clock, tm_zone, tm_year = created_at.split()
     struct_time = time.strptime(tm_mon, '%b')
-    if struct_time.tm_mon < 10:
-        return str(tm_year) + '0' + str(struct_time.tm_mon) + str(tm_mday)
-    else:
-        return str(tm_year) + str(struct_time.tm_mon) + str(tm_mday)
+    return str(tm_year) + two_digit_number_string_out(struct_time.tm_mon) + str(tm_mday)
 
-def convert_gmtime_into_NumString(gmtime):
+def convert_time_struct_into_yyymmdd_string(timeStruct):
     # print(len(res))mtime):
-    if gmtime.tm_mon < 10:
-        if gmtime.tm_mday < 10:
-            return str(gmtime.tm_year) + '0' + str(gmtime.tm_mon) + '0' + str(gmtime.tm_mday)
-        else:
-            return str(gmtime.tm_year) + '0' + str(gmtime.tm_mon) + str(gmtime.tm_mday)
+    return str(timeStruct.tm_year) + two_digit_number_string_out(timeStruct.tm_mon) + two_digit_number_string_out(timeStruct.tm_mday)
+
+def convert_time_struct_into_yyymmdd_hhmmss_string(timeStruct):
+    return str(timeStruct.tm_year) + two_digit_number_string_out(timeStruct.tm_mon) + two_digit_number_string_out(timeStruct.tm_mday) + '_' + two_digit_number_string_out(timeStruct.tm_hour) + two_digit_number_string_out(timeStruct.tm_min) + two_digit_number_string_out(timeStruct.tm_sec)
+
+def two_digit_number_string_out(integer):
+    if int(integer) < 10:
+        return '0' + str(integer)
     else:
-        if gmtime.tm_mday < 10:
-            return str(gmtime.tm_year) + str(gmtime.tm_mon) + '0' + str(gmtime.tm_mday)
-        else:
-            return str(gmtime.tm_year) + str(gmtime.tm_mon) + str(gmtime.tm_mday)
+        return str(integer)
 
 def print_created_at_from_dict(data):
     try:

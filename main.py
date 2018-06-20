@@ -10,22 +10,24 @@ from functions import *
 
 # todo:
 # when the date changes, check the previous file if it has all the data
+# log file writing, need to be checked
 
 
 print('icecandy...')
-startTime = time.time()
+startTime = time.localtime()
 gmtime = time.gmtime()
 
-print( 'startTime(local) :', time.asctime(time.localtime(startTime)) )
+print( 'startTime(local) :', time.asctime(startTime) )
 print( 'startTime(global):', time.asctime(gmtime) )
+raise SystemExit
 
-gmtimeString =  convert_gmtime_into_NumString(gmtime) # this is used to open a file
+gmtimeString =  convert_time_struct_into_yyymmdd_string(gmtime) # this is used to open a file
 
 try:
     fileNames = os.listdir('database_json')
     maxFileName = max(fileNames)
 except:
-    print(' err: database_json foler is empty ')
+    print(' warn: database_json foler is empty ')
 
 # todo: there must be a better way for this..
 sortedData = []
@@ -42,7 +44,7 @@ try: # err if no file
     open_n_more_files(number_of_file_loads, fileNames, unionData)
 
 except FileNotFoundError:
-    print(" There is no file that match, so let's make an empty file. ")
+    print(" warn: There is no file that match, so let's make an empty file. ")
     with open('database_json/' + gmtimeString + '.json', 'w') as f:
         unionData = []
         json.dump(unionData, f)
@@ -57,7 +59,7 @@ def main():
         res = get_user_timeline(screen_name, count, exclude_replies, include_rts)
         for tweet in res:
             print(tweet['created_at'])
-            # print(convert_created_at_into_NumString(tweet['created_at']))
+            # print(convert_created_at_into_yyymmdd_string(tweet['created_at']))
             print(tweet['user']['screen_name'] + ' (' + tweet['user']['name'] + ')')
             print(tweet['full_text'])
             print('-----')
@@ -82,6 +84,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-    endTime = time.time()
+    endTime = time.localtime()
     elapsedTime = endTime - startTime
     print('elapsedTime in sec: ' + str(elapsedTime))
