@@ -9,8 +9,7 @@ from functions import *
 
 
 # todo:
-# maxFileName = max(os.listdir('database_json')) ==> if foler is empty, error. fix it
-
+# when the date changes, check the previous file if it has all the data
 
 
 print('icecandy...')
@@ -22,8 +21,11 @@ print( 'startTime(global):', time.asctime(gmtime) )
 
 gmtimeString =  convert_gmtime_into_NumString(gmtime) # this is used to open a file
 
-fileNames = os.listdir('database_json')
-maxFileName = max(os.listdir('database_json'))
+try:
+    fileNames = os.listdir('database_json')
+    maxFileName = max(fileNames)
+except:
+    print(' err: database_json foler is empty ')
 
 # todo: there must be a better way for this..
 sortedData = []
