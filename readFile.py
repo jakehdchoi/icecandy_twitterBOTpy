@@ -16,7 +16,7 @@ gmtime = time.gmtime()
 print( 'startTime(local) :', time.asctime(time.localtime(startTime)) )
 print( 'startTime(global):', time.asctime(gmtime) )
 
-with open('database_json/20180619.json', 'r') as f:
+with open('database_json/20180620.json', 'r') as f:
     unionData = json.load(f)
 
 

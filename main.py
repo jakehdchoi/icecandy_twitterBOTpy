@@ -36,13 +36,12 @@ try: # err if no file
     with open('database_json/' + gmtimeString + '.json', 'r') as f:
         try:
             unionData = json.load(f)
-        except:
+        except: # if not json format
             unionData = []
     # print(pjson(unionData))
 
     open_n_more_files(number_of_file_loads, fileNames, unionData)
     yesterdayCheck = False
-
 
 except FileNotFoundError:
     print(" warn: There is no file that match, making an empty file.. ")
