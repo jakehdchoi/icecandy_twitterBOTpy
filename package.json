@@ -1,0 +1,24 @@
+{
+  "name": "icecandy_twitterbotpy",
+  "version": "1.0.0",
+  "description": "collecting tweets",
+  "main": "webapp.js",
+  "dependencies": {
+    "ip": "^1.1.5",
+    "sanitize-html": "^1.18.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakehdchoi/icecandy_twitterBOTpy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakehdchoi/icecandy_twitterBOTpy/issues"
+  },
+  "homepage": "https://github.com/jakehdchoi/icecandy_twitterBOTpy#readme"
+}
