@@ -15,6 +15,10 @@ module.exports = {
         `;
     },
     HTML: function(title, body){
+        // var now = new Date();
+        var utc = new Date().toUTCString();
+        // var utc = Date.UTC( now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds() )
+
         return `
         <!doctype html>
         <html>
@@ -24,6 +28,7 @@ module.exports = {
         </head>
         <body>
           <h1><a href="/">WEB</a></h1>
+          <p>${utc}</p>
           ${body}
         </body>
         </html>
