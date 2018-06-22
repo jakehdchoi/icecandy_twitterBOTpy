@@ -43,7 +43,13 @@ module.exports = {
         var list = '<ul>';
         var i = data.length - 1;
         while (i >= 0) {
-            list = list + `<li>${data[i].created_at}</li>`
+            list = list +
+            `
+            <li>
+                <p><a href="https://twitter.com/${data[i].user.screen_name}/status/${data[i].id_str}" target="_blank">${data[i].created_at}</a>, ${data[i].user.screen_name} (${data[i].user.name})</p>
+                <p>${data[i].full_text}</p>
+            </li>
+            `;
             i = i - 1;
         }
         list = list + '</ul>';

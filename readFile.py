@@ -27,7 +27,7 @@ for tweet in unionData:
     print('-----')
 
 print('')
-# print(pjson(unionData))
+print(pjson(unionData))
 print(len(unionData))
 
 

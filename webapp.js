@@ -2,7 +2,7 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
-const qs = require('querystring');
+// const qs = require('querystring');
 const path = require('path');
 // sudo npm install -S ip
 const ip = require('ip');
