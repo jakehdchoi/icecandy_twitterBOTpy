@@ -16,7 +16,7 @@ gmtime = time.gmtime()
 print( 'startTime(local) :', time.asctime(time.localtime(startTime)) )
 print( 'startTime(global):', time.asctime(gmtime) )
 
-with open('database_json/20180620.json', 'r') as f:
+with open('database_json/20180624.json', 'r') as f:
     unionData = json.load(f)
 
 
@@ -27,7 +27,7 @@ for tweet in unionData:
     print('-----')
 
 print('')
-print(pjson(unionData))
+# print(pjson(unionData))
 print(len(unionData))
 
 

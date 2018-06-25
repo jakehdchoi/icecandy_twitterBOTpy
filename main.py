@@ -51,7 +51,7 @@ except FileNotFoundError:
 
     open_n_more_files(number_of_file_loads, fileNames, unionData)
     yesterdayCheck = True
-    yesterdayGmtime = time.asctime(time.gmtime( time.time() - 60*60*24 ))
+    yesterdayGmtime = time.gmtime( time.time() - 60*60*24 )
 
 
 def main():
@@ -73,11 +73,14 @@ def main():
     # yesterday file update logic
     while(yesterdayCheck == True):
         print('yesterday file updating..')
-        with open('database_json/' + convert_time_struct_into_yyyymmdd_string(yesterdayGmtime) + '.json', 'r') as f:
-            try:
-                yesterdayData = json.load(f)
-            except:
-                break
+        try:
+            with open('database_json/' + convert_time_struct_into_yyyymmdd_string(yesterdayGmtime) + '.json', 'r') as f:
+                try:
+                    yesterdayData = json.load(f)
+                except:
+                    yesterdayData = []
+        except: # when no file exists
+            yesterdayData = []
 
         merge_without_duplicate(yesterdayData, unionData)
 

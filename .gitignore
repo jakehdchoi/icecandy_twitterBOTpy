@@ -5,6 +5,8 @@ credentials.py
 # database directory
 database_json/*.json
 
+# node modules
+node_modules/
 
 # tweepy
 tweepy/
