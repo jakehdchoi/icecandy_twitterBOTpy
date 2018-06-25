@@ -103,7 +103,8 @@ def exclude_objects_by_created_at(unionData, sortedData, gmtime):
     return True
 
 def order_objects_by_created_at(data):
-    return sorted(data, key=itemgetter('created_at'), reverse=True)
+    return sorted(data, key=itemgetter('created_at'))
+    # return sorted(data, key=itemgetter('created_at'), reverse=True)
 
 # insert only ordered data, otherwise doesn't work
 def remove_duplicated_tweets_from_ordered_data(data):
