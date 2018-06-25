@@ -1,19 +1,20 @@
 # icecandy_twitterBOTpy
 collecting tweets
 
-npm install:
+
+* npm install:
 ```
 sudo apt update
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
-pm2 install:
+* pm2 install:
 ```
 sudo npm install pm2 -g
 ```
 
-init:
+* init:
 ```
 npm init
 sudo npm install -S ip
