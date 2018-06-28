@@ -1,0 +1,20 @@
+userList = [
+    'jakehdchoi',
+    'BTCTN',
+    'Huobi_Pro',
+    'justinsuntron',
+    'NeerajKA',
+    'VitalikButerin',
+    'aantonop',
+    'NickSzabo4',
+    'gavinandresen',
+    'SatoshiLite',
+    'coindesk',
+    'rogerkver',
+    'ethereumJoseph',
+    'Ripple',
+    'bitmexdotcom',
+    'bitcoin',
+    'Cointelegraph',
+    'BitcoinMagazine'
+]
