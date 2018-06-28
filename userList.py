@@ -16,5 +16,6 @@ userList = [
     'bitmexdotcom',
     'bitcoin',
     'Cointelegraph',
-    'BitcoinMagazine'
+    'BitcoinMagazine',
+    'btcblockbot'
 ]
